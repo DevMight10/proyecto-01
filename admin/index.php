@@ -17,7 +17,7 @@ $pedidos_pendientes = $stmt->fetchColumn();
 $stmt = $pdo->query("SELECT COUNT(*) as total FROM mensajes WHERE leido = 0");
 $mensajes_nuevos = $stmt->fetchColumn();
 
-include '../includes/header.php';
+include 'includes/admin_header.php';
 ?>
 
 <main>
