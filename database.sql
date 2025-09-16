@@ -28,9 +28,11 @@ CREATE TABLE productos (
     imagen VARCHAR(255),
     stock INT DEFAULT 0,
     activo BOOLEAN DEFAULT TRUE,
+    destacado BOOLEAN DEFAULT FALSE,   
     fecha_creacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (categoria_id) REFERENCES categorias(id)
 );
+
 
 -- Tabla de pedidos
 CREATE TABLE pedidos (
