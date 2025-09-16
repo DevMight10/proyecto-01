@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/proyecto-01/assets/css/products.css">
     <link rel="stylesheet" href="/proyecto-01/assets/css/forms.css">
     <link rel="stylesheet" href="/proyecto-01/assets/css/cart.css">
-    <link rel="stylesheet" href="/proyecto-01/assets/css/admin.css">
+    <link rel="stylesheet" href="/proyecto-01/assets/css/style.css">
     <link rel="stylesheet" href="/proyecto-01/assets/css/responsive.css">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -24,12 +24,12 @@
                 <p>Panel de Administración</p>
             </div>
             <nav class="nav-menu">
-                <a href="../index.php">Ver Sitio</a>
-                <a href="index.php">Dashboard</a>
-                <a href="productos.php">Productos</a>
-                <a href="pedidos.php">Pedidos</a>
-                <a href="mensajes.php">Mensajes</a>
-                <a href="logout.php">Salir</a>
+                <a href="/proyecto-01/index.php">Ver Sitio</a>
+                <a href="/proyecto-01/admin/index.php">Dashboard</a>
+                <a href="/proyecto-01/admin/productos.php">Productos</a>
+                <a href="/proyecto-01/admin/pedidos.php">Pedidos</a>
+                <a href="/proyecto-01/admin/mensajes.php">Mensajes</a>
+                <a href="/proyecto-01/logout.php">Salir</a>
             </nav>
         </div>
     </header>

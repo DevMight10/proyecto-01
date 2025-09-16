@@ -3,6 +3,13 @@ require_once '../config/database.php';
 require_once '../config/session.php';
 require_once '../includes/functions.php';
 
+requireAdmin();
+
+// Generar un token CSRF si no existe
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
 $page_title = 'Editar Producto';
 
 // Validar que se haya pasado un ID
@@ -29,6 +36,10 @@ $categorias = $stmt_cat->fetchAll();
 
 // Procesar el formulario de actualización
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (!isset($_POST['csrf_token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf_token'])) {
+        die('Error de validación CSRF.');
+    }
+
     $nombre = $_POST['nombre'];
     $descripcion = $_POST['descripcion'];
     $precio = $_POST['precio'];
@@ -38,18 +49,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $imagen = $producto['imagen']; // Mantener la imagen actual por defecto
     
-    // Si se sube una nueva imagen
+    // Si se sube una nueva imagen, aplicar validación
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
-        $directorio_subida = '../public/';
-        $nombre_archivo = uniqid() . '-' . basename($_FILES['imagen']['name']);
-        $ruta_archivo = $directorio_subida . $nombre_archivo;
-        
-        if (move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta_archivo)) {
-            // Opcional: eliminar la imagen anterior si existe
-            if (!empty($producto['imagen']) && file_exists($directorio_subida . $producto['imagen'])) {
-                unlink($directorio_subida . $producto['imagen']);
+        if (!isset($error)) { // Proceder solo si no hay errores previos
+            $allowed_types = ['image/jpeg', 'image/png'];
+            $max_size = 5 * 1024 * 1024; // 5 MB
+
+            // Validar tamaño
+            if ($_FILES['imagen']['size'] > $max_size) {
+                $error = "El archivo es demasiado grande. El tamaño máximo permitido es 5 MB.";
+            } else {
+                // Validar tipo de archivo
+                $file_info = finfo_open(FILEINFO_MIME_TYPE);
+                $mime_type = finfo_file($file_info, $_FILES['imagen']['tmp_name']);
+                finfo_close($file_info);
+
+                if (!in_array($mime_type, $allowed_types)) {
+                    $error = "Tipo de archivo no permitido. Solo se aceptan imágenes JPG y PNG.";
+                } else {
+                    // Crear un nombre de archivo único y seguro
+                    $extension = pathinfo($_FILES['imagen']['name'], PATHINFO_EXTENSION);
+                    $nombre_archivo = uniqid('prod_') . '.' . strtolower($extension);
+                    $ruta_archivo = '../public/' . $nombre_archivo;
+
+                    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta_archivo)) {
+                        // Eliminar la imagen anterior si existe
+                        if (!empty($producto['imagen']) && file_exists('../public/' . $producto['imagen'])) {
+                            unlink('../public/' . $producto['imagen']);
+                        }
+                        $imagen = $nombre_archivo;
+                    } else {
+                        $error = "Error al mover el archivo subido.";
+                    }
+                }
             }
-            $imagen = $nombre_archivo;
         }
     }
 
@@ -79,6 +112,7 @@ include 'includes/admin_header.php';
     <?php endif; ?>
 
     <form action="editar_producto.php?id=<?php echo $producto_id; ?>" method="POST" enctype="multipart/form-data" class="form-container">
+        <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
         <div class="form-group">
             <label for="nombre">Nombre del Producto</label>
             <input type="text" id="nombre" name="nombre" class="form-control" value="<?php echo htmlspecialchars($producto['nombre']); ?>" required>
