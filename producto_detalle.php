@@ -26,37 +26,47 @@ include 'includes/header.php';
 ?>
 
 <main>
+    <?php if (isset($_GET['mensaje'])): ?>
+        <?php
+        // Si el mensaje contiene "stock" o "agotado", lo mostramos en rojo
+        $tipo = (strpos($_GET['mensaje'], 'stock') !== false || strpos($_GET['mensaje'], 'Agotado') !== false) ? 'error' : 'success';
+        ?>
+        <div class="notificacion <?php echo $tipo; ?>">
+            <?php echo htmlspecialchars($_GET['mensaje']); ?>
+        </div>
+    <?php endif; ?>
+
     <div class="container">
         <?php if (isset($mensaje)): ?>
             <div class="alert alert-success"><?php echo $mensaje; ?></div>
         <?php endif; ?>
-        
+
         <div class="product-detail">
             <div class="product-image">
-                <img src="public/<?php echo $producto['imagen']; ?>" 
-                     alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                <img src="public/<?php echo $producto['imagen']; ?>"
+                    alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
             </div>
-            
+
             <div class="product-info">
                 <h1><?php echo htmlspecialchars($producto['nombre']); ?></h1>
                 <p class="category">Categoría: <?php echo htmlspecialchars($producto['categoria_nombre']); ?></p>
                 <p class="price"><?php echo formatPrice($producto['precio']); ?></p>
-                
+
                 <div class="product-description">
                     <h3>Descripción</h3>
                     <p><?php echo nl2br(htmlspecialchars($producto['descripcion'])); ?></p>
                 </div>
 
                 <p class="stock <?php echo ($producto['stock'] <= 5 && $producto['stock'] > 0) ? 'low-stock' : ''; ?>">
-                    <?php 
-                        if ($producto['stock'] > 0) {
-                            echo 'Disponibles: ' . $producto['stock'];
-                        } else {
-                            echo '<span class="out-of-stock">Agotado</span>';
-                        }
+                    <?php
+                    if ($producto['stock'] > 0) {
+                        echo 'Disponibles: ' . $producto['stock'];
+                    } else {
+                        echo '<span class="out-of-stock">Agotado</span>';
+                    }
                     ?>
                 </p>
-                
+
                 <?php if (isLoggedIn()): ?>
                     <?php if ($producto['stock'] > 0): ?>
                         <form action="agregar_al_carrito.php" method="POST" class="add-to-cart-form">
@@ -74,8 +84,8 @@ include 'includes/header.php';
                         <p>Este producto no está disponible actualmente.</p>
                     <?php endif; ?>
                 <?php else: ?>
-                    <a href="login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
-                       class="btn btn-primary">Inicia sesión para comprar</a>
+                    <a href="login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
+                        class="btn btn-primary">Inicia sesión para comprar</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -83,49 +93,68 @@ include 'includes/header.php';
 </main>
 
 <style>
-.product-detail {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin: 2rem 0;
-}
-
-.product-image img {
-    width: 100%;
-    border-radius: 15px;
-}
-
-.product-info h1 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.product-description {
-    margin: 2rem 0;
-}
-
-.add-to-cart-form {
-    margin-top: 2rem;
-}
-
-.quantity-selector {
-    margin-bottom: 1rem;
-}
-
-.quantity-selector input {
-    width: 80px;
-    padding: 0.5rem;
-    border: 2px solid #e9ecef;
-    border-radius: 5px;
-    margin-left: 1rem;
-}
-
-@media (max-width: 768px) {
     .product-detail {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin: 2rem 0;
     }
-}
+
+    .product-image img {
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .product-info h1 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .product-description {
+        margin: 2rem 0;
+    }
+
+    .add-to-cart-form {
+        margin-top: 2rem;
+    }
+
+    .quantity-selector {
+        margin-bottom: 1rem;
+    }
+
+    .quantity-selector input {
+        width: 80px;
+        padding: 0.5rem;
+        border: 2px solid #e9ecef;
+        border-radius: 5px;
+        margin-left: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .product-detail {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+    }
+
+    .notificacion {
+        padding: 1rem 1.5rem;
+        margin: 1rem 0;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .notificacion.success {
+        background-color: #28a745;
+        /* verde */
+        color: #fff;
+    }
+
+    .notificacion.error {
+        background-color: #dc3545;
+        /* rojo */
+        color: #fff;
+    }
 </style>
 
 <?php include 'includes/footer.php'; ?>
