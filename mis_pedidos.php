@@ -113,7 +113,7 @@ include 'includes/header.php';
                             <span class="order-date"><?php echo date('d/m/Y', strtotime($pedido['fecha_pedido'])); ?></span>
                         </div>
                         <div class="order-summary-status">
-                            <span class="badge badge-<?php echo htmlspecialchars($pedido['estado']); ?>"><?php echo ucfirst(htmlspecialchars($pedido['estado'])); ?></span>
+                            <span class="badge badge-<?php echo htmlspecialchars($pedido['estado']); ?>"><?php echo htmlspecialchars(formatOrderStatus($pedido['estado'])); ?></span>
                             <span class="order-total"><?php echo formatPrice($pedido['total']); ?></span>
                             <i class="fas fa-chevron-down"></i>
                         </div>

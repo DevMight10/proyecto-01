@@ -30,6 +30,7 @@ $stmt = $pdo->prepare("SELECT * FROM productos WHERE id = ? AND activo = 1");
 $stmt->execute([$producto_id]);
 $producto = $stmt->fetch();
 
+
 // 5. Si el producto existe, verificar stock y añadirlo al carrito
 if ($producto) {
     $cantidad_en_carrito = isset($_SESSION['carrito'][$producto_id]['cantidad']) ? $_SESSION['carrito'][$producto_id]['cantidad'] : 0;

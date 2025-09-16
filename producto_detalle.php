@@ -28,37 +28,47 @@ include 'includes/header.php';
 
 
 <main>
+    <?php if (isset($_GET['mensaje'])): ?>
+        <?php
+        // Si el mensaje contiene "stock" o "agotado", lo mostramos en rojo
+        $tipo = (strpos($_GET['mensaje'], 'stock') !== false || strpos($_GET['mensaje'], 'Agotado') !== false) ? 'error' : 'success';
+        ?>
+        <div class="notificacion <?php echo $tipo; ?>">
+            <?php echo htmlspecialchars($_GET['mensaje']); ?>
+        </div>
+    <?php endif; ?>
+
     <div class="container">
         <?php if (isset($mensaje)): ?>
             <div class="alert alert-success"><?php echo $mensaje; ?></div>
         <?php endif; ?>
-        
+
         <div class="product-detail">
             <div class="product-image">
-                <img src="public/<?php echo $producto['imagen']; ?>" 
-                     alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
+                <img src="public/<?php echo $producto['imagen']; ?>"
+                    alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
             </div>
-            
+
             <div class="product-info">
                 <h1><?php echo htmlspecialchars($producto['nombre']); ?></h1>
                 <p class="category">Categoría: <?php echo htmlspecialchars($producto['categoria_nombre']); ?></p>
                 <p class="price"><?php echo formatPrice($producto['precio']); ?></p>
-                
+
                 <div class="product-description">
                     <h3>Descripción</h3>
                     <p><?php echo nl2br(htmlspecialchars($producto['descripcion'])); ?></p>
                 </div>
 
                 <p class="stock <?php echo ($producto['stock'] <= 5 && $producto['stock'] > 0) ? 'low-stock' : ''; ?>">
-                    <?php 
-                        if ($producto['stock'] > 0) {
-                            echo 'Disponibles: ' . $producto['stock'];
-                        } else {
-                            echo '<span class="out-of-stock">Agotado</span>';
-                        }
+                    <?php
+                    if ($producto['stock'] > 0) {
+                        echo 'Disponibles: ' . $producto['stock'];
+                    } else {
+                        echo '<span class="out-of-stock">Agotado</span>';
+                    }
                     ?>
                 </p>
-                
+
                 <?php if (isLoggedIn()): ?>
                     <?php if ($producto['stock'] > 0): ?>
                         <form action="agregar_al_carrito.php" method="POST" class="add-to-cart-form">
@@ -76,8 +86,8 @@ include 'includes/header.php';
                         <p>Este producto no está disponible actualmente.</p>
                     <?php endif; ?>
                 <?php else: ?>
-                    <a href="login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
-                       class="btn btn-primary">Inicia sesión para comprar</a>
+                    <a href="login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>"
+                        class="btn btn-primary">Inicia sesión para comprar</a>
                 <?php endif; ?>
             </div>
         </div>

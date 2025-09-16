@@ -38,4 +38,8 @@ function addToCart($producto_id, $nombre, $precio, $imagen, $stock, $cantidad = 
         );
     }
 }
+
+function formatOrderStatus($status) {
+    return ucfirst(str_replace('_', ' ', $status));
+}
 ?>

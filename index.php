@@ -6,7 +6,7 @@ require_once 'includes/functions.php';
 $page_title = 'Inicio';
 
 // Obtener productos destacados
-$stmt = $pdo->query("SELECT * FROM productos WHERE activo = 1 ORDER BY fecha_creacion DESC LIMIT 6");
+$stmt = $pdo->query("SELECT * FROM productos WHERE activo = 1 AND destacado = 1 ORDER BY fecha_creacion DESC LIMIT 6");
 $productos_destacados = $stmt->fetchAll();
 
 include 'includes/header.php';
