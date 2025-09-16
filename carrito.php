@@ -143,7 +143,7 @@ include 'includes/header.php';
                     </form>
                     
                     <a href="confirmar_pedido.php" class="btn btn-primary">
-                        Confirmar Pedido
+                        Continuar
                     </a>
                 </div>
             </div>

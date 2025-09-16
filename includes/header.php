@@ -30,6 +30,7 @@
                         <i class="fas fa-shopping-cart"></i> 
                         Carrito <?php echo getCartItemCount(); ?>
                     </a>
+                    <a href="mis_pedidos.php" class="opcion">Mis Pedidos</a>
                     <?php if (isAdmin()): ?>
                         <a href="admin/index.php" class="opcion">Admin</a>
                     <?php endif; ?>
