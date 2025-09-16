@@ -88,7 +88,7 @@ $mensajes = $stmt->fetchAll();
 include 'includes/admin_header.php';
 ?>
 
-<link rel="stylesheet" href="/proyecto-01/admin/styles/mensaje.css">
+<link rel="stylesheet" href="styles/mensaje.css">
 
 <main class="container">
     <h1>Mensajes de Contacto</h1>

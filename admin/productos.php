@@ -87,7 +87,9 @@
 
   include 'includes/admin_header.php';
   ?>
-<link rel="stylesheet" href="/proyecto-01/admin/styles/productos.css">
+<link rel="stylesheet" href="styles/productos.css">
+
+
 
   <main class="container">
       <h1>Gestión de Productos</h1>
@@ -203,60 +205,6 @@
       </div>
   </main>
 
-  <style>
-      .inactive-row {
-          background-color: #f8f9fa;
-          opacity: 0.6;
-      }
-      .badge-activo { background-color: #28a745; color: white; padding: 0.3em 0.6em; border-radius: 0.25rem; }
-      .badge-inactivo { background-color: #6c757d; color: white; padding: 0.3em 0.6em; border-radius: 0.25rem; }
-      .btn-destacar i {
-          font-size: 1.2rem;
-          transition: transform 0.2s;
-      }
-      .btn-destacar:hover i {
-          transform: scale(1.2);
-      }
+  
 
-      .filters-bar {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-bottom: 1.5rem;
-          flex-wrap: wrap;
-          gap: 1rem;
-          background-color: #f8f9fa;
-          padding: 1rem;
-          border-radius: 8px;
-      }
-      .filters {
-          display: flex;
-          gap: 0.5rem;
-          flex-wrap: wrap;
-      }
-      .filter-btn {
-          padding: 0.5rem 1rem;
-          background-color: #fff;
-          color: #343a40;
-          text-decoration: none;
-          border-radius: 20px;
-          border: 1px solid #ddd;
-          transition: all 0.3s;
-      }
-      .filter-btn:hover, .filter-btn.active {
-          background-color: var(--primary-color, #007bff);
-          color: white;
-          border-color: var(--primary-color, #007bff);
-      }
-      .search-form form {
-          display: flex;
-          gap: 0.5rem;
-      }
-      .search-form input {
-          padding: 0.5rem;
-          border-radius: 20px;
-          border: 1px solid #ddd;
-      }
-  </style>
-
-  <?php include '../includes/footer.php'; ?>
+  <?php include 'includes/admin_footer.php'; ?>  

@@ -40,6 +40,8 @@ $ultimos_pedidos = $pedidos_stmt->fetchAll(PDO::FETCH_ASSOC);
 include 'includes/admin_header.php';
 ?>
 
+<link rel="stylesheet" href="styles/index.css">
+
 <main class="container">
     <h1>Panel de Administración</h1>
 
@@ -103,70 +105,6 @@ include 'includes/admin_header.php';
 
 <?php include 'includes/admin_footer.php'; ?>  
 
-<style>
-    .admin-stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 2rem;
-        margin: 2rem 0;
-    }
-
-    .stat-card {
-        background: white;
-        padding: 2rem;
-        border-radius: 15px;
-        text-align: center;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .chart-container {
-        background: white;
-        padding: 2rem;
-        border-radius: 15px;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        margin-bottom: 2rem;
-    }
-
-    .recent-orders table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 1rem;
-    }
-
-    .recent-orders th,
-    .recent-orders td {
-        padding: 0.75rem;
-        border-bottom: 1px solid #eee;
-    }
-
-    .badge-pendiente {
-        background-color: #ffc107;
-        color: #333;
-        padding: 0.3em 0.6em;
-        border-radius: 0.25rem;
-    }
-
-    .badge-en_proceso {
-        background-color: #17a2b8;
-        color: white;
-        padding: 0.3em 0.6em;
-        border-radius: 0.25rem;
-    }
-
-    .badge-entregado {
-        background-color: #28a745;
-        color: white;
-        padding: 0.3em 0.6em;
-        border-radius: 0.25rem;
-    }
-
-    .badge-cancelado {
-        background-color: #6c757d;
-        color: white;
-        padding: 0.3em 0.6em;
-        border-radius: 0.25rem;
-    }
-</style>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
@@ -202,5 +140,3 @@ include 'includes/admin_header.php';
         }
     });
 </script>
-
-<?php include '../includes/footer.php'; ?>

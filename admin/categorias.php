@@ -57,6 +57,7 @@ $categorias = $stmt->fetchAll();
 
 include 'includes/admin_header.php';
 ?>
+<link rel="stylesheet" href="styles/categorias.css">
 
 <main class="container">
     <h1>Gestión de Categorías</h1>
@@ -120,144 +121,7 @@ include 'includes/admin_header.php';
     </div>
 </main>
 
-<style>
-/* ====== Admin: Categorías ====== */
 
-/* Grid principal */
-.category-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 2rem;
-  align-items: flex-start;
-}
 
-/* Caja formulario */
-.form-container {
-  background: #fff;
-  border: 1px solid #E9EFEC;
-  border-radius: 16px;
-  box-shadow: 0 10px 22px rgba(0,0,0,.06);
-  padding: 1.5rem;
-}
+<?php include 'includes/admin_footer.php'; ?>  
 
-.form-container h2 {
-  margin-bottom: 1rem;
-  font-size: 1.1rem;
-  color: #2c3e36;
-}
-
-/* Formulario */
-.form-group {
-  margin-bottom: 1rem;
-}
-
-.form-group label {
-  font-size: .9rem;
-  font-weight: 600;
-  color: #42524b;
-}
-
-.form-control {
-  width: 100%;
-  padding: .6rem .8rem;
-  border: 2px solid #DFE7E4;
-  border-radius: 10px;
-  background:#fff;
-  font-size: .95rem;
-}
-
-.form-control:focus {
-  outline: none;
-  border-color: #007B44;
-  box-shadow: 0 0 0 4px rgba(0,123,68,.12);
-}
-
-/* Botón principal */
-.btn-primary {
-  background:#007B44;
-  border:0;
-  color:#fff;
-  padding: .6rem 1rem;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor:pointer;
-}
-.btn-primary:hover {
-  background:#005f32;
-}
-
-/* Tabla de categorías */
-.table-responsive {
-  background: #fff;
-  border: 1px solid #E9EFEC;
-  border-radius: 16px;
-  box-shadow: 0 10px 22px rgba(0,0,0,.06);
-  overflow-x: auto;
-  padding: 1rem;
-}
-
-.table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0;
-}
-
-.table thead th {
-  background: #fff;
-  padding: 12px 14px;
-  font-size: .9rem;
-  color: #6d7a73;
-  border-bottom: 1px solid #E9EFEC;
-  text-align: left;
-}
-
-.table tbody td {
-  padding: 12px 14px;
-  border-bottom: 1px solid #F0F4F2;
-}
-
-.table tbody tr:hover {
-  background: #F6FAF8;
-}
-
-/* Acciones */
-.actions-cell-buttons {
-  display: flex;
-  gap: .5rem;
-}
-
-.btn-sm {
-  padding: 6px 10px;
-  border-radius: 10px;
-  font-size: .92rem;
-}
-
-/* Variantes */
-.btn-secondary {
-  background:#EEF3F1;
-  color:#1f3029;
-  border:1px solid #DFE7E4;
-}
-.btn-secondary:hover {
-  background:#E6EFEB;
-}
-
-.btn-danger {
-  background:#B00020;
-  color:#fff;
-  border:0;
-}
-.btn-danger:hover {
-  background:#8E0019;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .category-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-</style>
-
-<?php include '../includes/footer.php'; ?>

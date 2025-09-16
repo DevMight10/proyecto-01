@@ -1,25 +1,12 @@
-/* ====== ADMIN: Dashboard ====== */
-main{
-  background: #F6FAF8; /* fondo suave del área principal */
-}
-main .container{
-  padding-block: 20px 40px;
-}
+/* ====== Dashboard Admin ====== */
 
-main h1{
-  font-size: 1.6rem;
-  margin: 8px 0 16px;
-  color: #222;
-}
-
-/* --- KPIs / Estadísticas --- */
+/* Stats (4 columnas) */
 .admin-stats{
   display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
+  grid-template-columns: repeat(4, minmax(0,1fr));
   gap: 18px;
-  margin-bottom: 24px;
+  margin: 10px 0 24px;
 }
-
 .stat-card{
   background: #fff;
   border: 1px solid #E9EFEC;
@@ -28,7 +15,7 @@ main h1{
   display: flex;
   flex-direction: column;
   gap: 6px;
-  transition: border-color .15s ease, transform .12s ease, box-shadow .15s ease;
+  transition: border-color .15s, transform .12s, box-shadow .15s;
 }
 .stat-card:hover{
   transform: translateY(-2px);
@@ -39,95 +26,122 @@ main h1{
   margin: 0;
   font-size: 2rem;
   line-height: 1;
-  color: #007B44; /* acento principal */
+  color: #007B44;
   font-weight: 800;
 }
 .stat-card p{
   margin: 0 0 8px;
   color: #6d7a73;
 }
-.stat-card .btn{
-  align-self: start;
-  margin-top: auto; /* empuja el botón abajo */
-}
+.stat-card .btn{ align-self: start; margin-top: auto; }
 
-/* Modificadores opcionales por tipo (si decides usarlos) */
-.stat-card.warning h3{ color: #b65900; }  /* pendientes, ámbar */
-.stat-card.danger  h3{ color: #B00020; }  /* errores/alertas */
-
-/* --- Menú principal del admin --- */
-.admin-menu{
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0,1fr));
-  gap: 18px;
-}
-
-.admin-menu-item{
-  display: block;
+/* Chart card */
+.chart-container{
   background: #fff;
   border: 1px solid #E9EFEC;
   border-radius: 16px;
-  padding: 18px;
-  text-decoration: none;
-  color: inherit;
-  transition: border-color .15s ease, transform .12s ease, box-shadow .15s ease;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  padding: 16px 18px;
+  margin-bottom: 24px;
 }
-.admin-menu-item:hover{
-  transform: translateY(-2px);
-  border-color: #cfd8d4;
-  box-shadow: 0 10px 22px rgba(0,0,0,.08);
-}
-.admin-menu-item:focus-visible{
-  outline: none;
-  box-shadow: 0 0 0 4px rgba(0,123,68,.12);
-  border-color: #007B44;
-}
-
-.admin-menu-item i{
-  width: 44px;
-  height: 44px;
-  display: grid;
-  place-items: center;
-  border-radius: 12px;
-  background: rgba(0,123,68,.10); /* verde suave */
-  color: #007B44;
-  font-size: 1.2rem;
-  margin-bottom: 10px;
-}
-
-.admin-menu-item h3{
-  margin: 0 0 6px;
-  font-size: 1.05rem;
+.chart-container h2{
+  margin: 0 0 10px;
+  font-size: 1.1rem;
   color: #222;
 }
-.admin-menu-item p{
+.chart-container canvas{
+  width: 100% !important;
+  height: 340px !important;      /* alto cómodo por defecto */
+  display: block;
+  border-radius: 12px;
+}
+
+/* Tabla “Últimos 5 Pedidos” */
+.recent-orders{
+  background: #fff;
+  border: 1px solid #E9EFEC;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  padding: 30px 15px 30px 15px;
+}
+.recent-orders h2{
+  padding: 0 18px 10px;
   margin: 0;
-  color: #4a5a53;
+  font-size: 1.1rem;
+  color: #222;
 }
 
-/* --- Responsive --- */
-@media (max-width: 1000px){
-  .admin-stats,
-  .admin-menu{
-    grid-template-columns: repeat(2, minmax(0,1fr));
-  }
+/* Tabla base (puedes reutilizar si ya la tienes) */
+.table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
 }
-@media (max-width: 580px){
-  .admin-stats,
-  .admin-menu{
-    grid-template-columns: 1fr;
-  }
+.table thead th{
+  position: sticky; top: 0; z-index: 1;
+  background: #fff;
+  padding: 12px 18px;
+  font-size: .9rem;
+  color: #6d7a73;
+  text-align: left;
+  border-bottom: 1px solid #E9EFEC;
+}
+.table tbody td{
+  padding: 12px 18px;
+  vertical-align: middle;
+  border-bottom: 1px solid #F0F4F2;
+}
+.table tbody tr:hover{ background: #F6FAF8; }
+.table tbody tr:last-child td{ border-bottom: 0; }
+
+/* Columnas útiles */
+.table th:nth-child(1), .table td:nth-child(1){ width: 140px; } /* Número */
+.table th:nth-child(3), .table td:nth-child(3){ width: 140px; } /* Fecha */
+.table th:nth-child(4), .table td:nth-child(4){ width: 120px; } /* Total */
+.table th:nth-child(5), .table td:nth-child(5){ width: 120px; } /* Estado */
+
+/* Precio en verde */
+.table td:nth-child(4){
+  color: #007B44;
+  font-weight: 700;
 }
 
-/* --- Layout de página a pantalla completa --- */
-html, body{ height: 100%; }
-body{
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;   /* header arriba, main crece, footer abajo */
+/* Badges de estado */
+.badge{
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .9rem;
+  border: 1px solid transparent;
+  white-space: nowrap;
 }
-main{ flex: 1 0 auto; }      /* el main ocupa todo el alto disponible */
-.admin-footer{ flex-shrink: 0; } /* footer siempre al fondo */
+.badge-pendiente{
+  background: #FFF4E6;
+  color: #b65900;
+  border-color: #FFE2BF;
+}
+.badge-en_proceso{
+  background: #EAF6EF;
+  color: #1f6a44;
+  border-color: #CFEBDD;
+}
+.badge-entregado{
+  background: #E6F4EA;
+  color: #0F6B3E;
+  border-color: #C8E7D3;
+}
+.badge-cancelado{
+  background: #FCEBEC;
+  color: #8e1b1b;
+  border-color: #F4C7CB;
+}
 
-/* Mantén tu fondo del main visible hasta el pie */
-main{ background: #F6FAF8; }
+/* Responsive */
+@media (max-width: 1100px){
+  .admin-stats{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+@media (max-width: 600px){
+  .admin-stats{ grid-template-columns: 1fr; }
+  .chart-container canvas{ height: 280px !important; }
+}

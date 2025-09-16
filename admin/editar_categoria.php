@@ -43,6 +43,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'includes/admin_header.php';
 ?>
 
+<link rel="stylesheet" href="styles/editar_categoria.css">
+
+
 <main class="container">
     <h1>Editar Categoría</h1>
 
@@ -65,4 +68,5 @@ include 'includes/admin_header.php';
     </div>
 </main>
 
-<?php include '../includes/footer.php'; ?>
+
+<?php include 'includes/admin_footer.php'; ?>  

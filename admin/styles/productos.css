@@ -1,35 +1,80 @@
-/* Utilidad */
-.mb-3{ margin-bottom: 1rem; }
-
-/* Alertas (si no las tienes ya) */
-.alert{
-  padding: 12px 14px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  margin: 12px 0;
-  font-weight: 600;
+/* ====== Barra de filtros + búsqueda ====== */
+.filters-bar{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin: 8px 0 16px;
 }
-.alert-success{ background:#EAF6EF; color:#1f6a44; border-color:#CFEBDD; }
-.alert-danger { background:#FCEBEC; color:#8e1b1b; border-color:#F4C7CB; }
 
-/* Contenedor responsive de la tabla */
+/* Chips de categorías */
+.filters{
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.filter-btn{
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid #E3E8E5;
+  color: #2b2b2b;
+  background: #fff;
+  transition: background .2s, color .2s, border-color .2s, box-shadow .2s;
+  white-space: nowrap;
+}
+.filter-btn:hover{
+  border-color: #cfd8d4;
+  box-shadow: 0 4px 14px rgba(0,0,0,.06);
+}
+.filter-btn.active{
+  background: #007B44;
+  color: #fff;
+  border-color: #007B44;
+}
+
+/* Búsqueda */
+.search-form form{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.search-form input[type="text"]{
+  min-width: 260px;
+  padding: .6rem .8rem;
+  border: 2px solid #DFE7E4;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 1rem;
+  transition: border-color .15s, box-shadow .15s;
+}
+.search-form input[type="text"]:focus{
+  outline: none;
+  border-color: #007B44;
+  box-shadow: 0 0 0 4px rgba(0,123,68,.12);
+}
+
+/* ====== Tabla ====== */
 .table-responsive{
   background: #fff;
   border: 1px solid #E9EFEC;
   border-radius: 16px;
   box-shadow: 0 10px 22px rgba(0,0,0,.06);
-  overflow: hidden;               /* redondeo visible */
-  overflow-x: auto;               /* scroll horizontal en móvil */
+  overflow: hidden;
+  overflow-x: auto;
 }
 
-/* Tabla */
 .table{
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
 }
-
-/* Encabezado fijo y limpio */
 .table thead th{
   position: sticky; top: 0; z-index: 1;
   background: #fff;
@@ -39,8 +84,6 @@
   text-align: left;
   border-bottom: 1px solid #E9EFEC;
 }
-
-/* Celdas */
 .table tbody td{
   padding: 12px 14px;
   vertical-align: middle;
@@ -49,10 +92,11 @@
 .table tbody tr:hover{ background: #F6FAF8; }
 .table tbody tr:last-child td{ border-bottom: 0; }
 
-/* Anchos útiles por columna */
-.table th:nth-child(1), .table td:nth-child(1){ width: 72px; }  /* ID */
-.table th:nth-child(2), .table td:nth-child(2){ width: 86px; }  /* Imagen */
-.table th:nth-child(8), .table td:nth-child(8){ width: 128px; } /* Acciones */
+/* Columnas útiles */
+.table th:nth-child(1), .table td:nth-child(1){ width: 72px; }   /* ID */
+.table th:nth-child(2), .table td:nth-child(2){ width: 86px; }   /* Imagen */
+.table th:nth-child(8), .table td:nth-child(8){ width: 92px; }   /* Destacado */
+.table th:nth-child(9), .table td:nth-child(9){ width: 220px; }  /* Acciones */
 
 /* Imagen */
 .table td img{
@@ -62,35 +106,81 @@
   display: block;
 }
 
-/* Formato de precio y activo */
-.table td:nth-child(5){           /* Precio */
+/* Precio en verde */
+.table td:nth-child(5){
   color: #007B44;
   font-weight: 700;
 }
-.table td:nth-child(7){           /* Activo */
-  font-weight: 700;
+
+/* Fila inactiva */
+.inactive-row{
+  opacity: .65;
+  background: #FAFBFA;
 }
 
-/* Botones en acciones */
+/* ====== Badges estado ====== */
+.badge{
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .9rem;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge-activo{
+  background: #EAF6EF;
+  color: #1f6a44;
+  border-color: #CFEBDD;
+}
+.badge-inactivo{
+  background: #EDF1F0;
+  color: #42524b;
+  border-color: #DFE7E4;
+}
+
+/* ====== Botón “destacar” (estrella) ====== */
+.btn-destacar{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  border: 1px solid #E9EFEC;
+  background: #fff;
+  text-decoration: none;
+  transition: transform .08s, border-color .15s, box-shadow .15s;
+}
+.btn-destacar:hover{
+  transform: translateY(-1px);
+  border-color: #cfd8d4;
+  box-shadow: 0 6px 14px rgba(0,0,0,.06);
+}
+/* Si quitas los styles inline, puedes usar: */
+.btn-destacar .fas.fa-star{ color:#ffc107; }  /* destacada */
+.btn-destacar .far.fa-star{ color:#6c757d; }  /* no destacada */
+
+/* ====== Botones pequeños de acciones ====== */
 .btn-sm{ padding: 6px 10px; border-radius: 10px; font-size: .92rem; }
 
-/* Variantes (apoyadas en tu .btn global) */
+/* Variantes comunes (si no las tienes ya) */
 .btn-secondary{
-  background:#EEF3F1; color:#1f3029;
-  border:1px solid #DFE7E4; box-shadow:none;
+  background:#EEF3F1; color:#1f3029; border:1px solid #DFE7E4; box-shadow:none;
 }
 .btn-secondary:hover{ background:#E6EFEB; }
 
-.btn-danger{
-  background:#B00020; color:#fff; border:0; box-shadow:none;
+.btn-warning{
+  background:#FFC107; color:#2b2b2b; border:0; box-shadow:none;
 }
-.btn-danger:hover{ background:#8E0019; }
+.btn-warning:hover{ background:#E0AC06; }
 
-/* Espaciado entre botones dentro de la celda */
-.table td .btn{ margin-right: 8px; }
-.table td .btn:last-child{ margin-right: 0; }
+.btn-success{
+  background:#007B44; color:#fff; border:0; box-shadow:none;
+}
+.btn-success:hover{ background:#0A8B53; }
 
-/* Títulos y botón superior */
-main.container > h1{
-  font-size: 1.6rem; color:#222; margin: 8px 0 16px;
+/* Responsive */
+@media (max-width: 640px){
+  .search-form input[type="text"]{ min-width: 0; flex: 1; }
+  .table th:nth-child(9), .table td:nth-child(9){ min-width: 220px; }
 }

@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="/proyecto-01/admin/styles/footer.css">
+<link rel="stylesheet" href="styles/footer.css">
 <footer class="admin-footer">
   <div class="container">
     <span>© <?php echo date('Y'); ?> Mini Chic</span>

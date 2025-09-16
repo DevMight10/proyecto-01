@@ -1,0 +1,107 @@
+/* ====== Admin: Categorías ====== */
+
+/* Layout: formulario + tabla */
+.category-grid{
+  display: grid;
+  grid-template-columns: 360px 1fr;   /* panel izquierdo fijo, tabla flexible */
+  gap: 18px;
+  margin: 10px 0 24px;
+}
+@media (max-width: 900px){
+  .category-grid{ grid-template-columns: 1fr; }
+}
+
+/* Panel de formulario (card) */
+.form-container{
+  background: #fff;
+  border: 1px solid #E9EFEC;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  padding: 16px 18px;
+}
+.form-container h2{
+  margin: 0 0 10px;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+/* Campos del formulario */
+.form-group{ display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+.form-group label{ font-weight: 600; color: #2b2b2b; }
+.form-control{
+  width: 100%;
+  padding: .65rem .8rem;
+  border: 2px solid #DFE7E4;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 1rem;
+  transition: border-color .15s, box-shadow .15s;
+}
+.form-control:focus{
+  outline: none;
+  border-color: #007B44;
+  box-shadow: 0 0 0 4px rgba(0,123,68,.12);
+}
+
+/* Tabla (card + sticky header) */
+.table-responsive{
+  background: #fff;
+  border: 1px solid #E9EFEC;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  overflow: hidden;
+}
+.table-responsive h2{
+  margin: 0; padding: 14px 18px 6px;
+  font-size: 1.1rem; color: #222;
+}
+
+.table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.table thead th{
+  position: sticky; top: 0; z-index: 1;
+  background: #fff;
+  padding: 12px 18px;
+  font-size: .9rem;
+  color: #6d7a73;
+  text-align: left;
+  border-bottom: 1px solid #E9EFEC;
+}
+.table tbody td{
+  padding: 12px 18px;
+  vertical-align: middle;
+  border-bottom: 1px solid #F0F4F2;
+}
+.table tbody tr:hover{ background: #F6FAF8; }
+.table tbody tr:last-child td{ border-bottom: 0; }
+
+/* Columnas útiles */
+.table th:nth-child(1), .table td:nth-child(1){ width: 80px; }   /* ID */
+.table th:nth-child(3), .table td:nth-child(3){ width: 120px; }  /* Productos */
+.table th:nth-child(4), .table td:nth-child(4){ width: 200px; }  /* Acciones */
+
+/* Celda de acciones: botones en línea con gap */
+.actions-cell-buttons{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Botones pequeños (apoyan tu .btn global) */
+.btn-sm{ padding: 6px 10px; border-radius: 10px; font-size: .92rem; }
+.btn-secondary{ background:#EEF3F1; color:#1f3029; border:1px solid #DFE7E4; box-shadow:none; }
+.btn-secondary:hover{ background:#E6EFEB; }
+.btn-danger{ background:#B00020; color:#fff; border:0; box-shadow:none; }
+.btn-danger:hover{ background:#8E0019; }
+.btn[disabled]{ opacity:.6; cursor: not-allowed; box-shadow:none; }
+
+/* Alertas básicas (omite si ya las tienes) */
+.alert{
+  padding: 12px 14px; border-radius: 10px; border: 1px solid transparent;
+  margin: 12px 0; font-weight: 600;
+}
+.alert-success{ background:#EAF6EF; color:#1f6a44; border-color:#CFEBDD; }
+.alert-danger { background:#FCEBEC; color:#8e1b1b; border-color:#F4C7CB; }
