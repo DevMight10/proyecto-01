@@ -1,0 +1,29 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    /* font-size: 18px; */
+    /* border: 1px red solid; */
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.btn{
+  display: inline-block;
+  background: #007B44;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 10px 24px rgba(0,0,0,.22);
+  transition: background .2s, box-shadow .2s, transform .05s;
+}
+.btn:hover{ background:#3F9C72; }
+.btn:active{ transform: translateY(1px); }
+
