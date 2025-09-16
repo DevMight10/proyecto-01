@@ -17,7 +17,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['usuario_nombre'] = $usuario['nombre'];
         $_SESSION['tipo'] = $usuario['tipo'];
-        
+
+        // --- Cargar carrito desde la base de datos ---
+        $stmt_cart = $pdo->prepare("SELECT ci.producto_id, ci.cantidad, p.nombre, p.precio, p.imagen FROM carrito_items ci JOIN productos p ON ci.producto_id = p.id WHERE ci.usuario_id = ?");
+        $stmt_cart->execute([$usuario['id']]);
+        $items_db = $stmt_cart->fetchAll();
+
+        if ($items_db) {
+            $_SESSION['carrito'] = [];
+            foreach ($items_db as $item) {
+                $_SESSION['carrito'][$item['producto_id']] = [
+                    'cantidad' => $item['cantidad'],
+                    'nombre' => $item['nombre'],
+                    'precio' => $item['precio'],
+                    'imagen' => $item['imagen']
+                ];
+            }
+        }
+        // --- Fin de la carga del carrito ---
+
         // Redirigir a la página anterior o al inicio
         $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'index.php';
         header("Location: $redirect");

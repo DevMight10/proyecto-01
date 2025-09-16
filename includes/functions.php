@@ -18,16 +18,10 @@ function getCartTotal() {
 }
 
 function getCartItemCount() {
-    $count = 0;
-    if (isset($_SESSION['carrito'])) {
-        foreach ($_SESSION['carrito'] as $item) {
-            $count += $item['cantidad'];
-        }
-    }
-    return $count;
+    return isset($_SESSION['carrito']) ? count($_SESSION['carrito']) : 0;
 }
 
-function addToCart($producto_id, $nombre, $precio, $imagen, $cantidad = 1) {
+function addToCart($producto_id, $nombre, $precio, $imagen, $stock, $cantidad = 1) {
     if (!isset($_SESSION['carrito'])) {
         $_SESSION['carrito'] = array();
     }
@@ -39,7 +33,8 @@ function addToCart($producto_id, $nombre, $precio, $imagen, $cantidad = 1) {
             'nombre' => $nombre,
             'precio' => $precio,
             'imagen' => $imagen,
-            'cantidad' => $cantidad
+            'cantidad' => $cantidad,
+            'stock' => $stock
         );
     }
 }

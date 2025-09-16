@@ -9,15 +9,18 @@ $page_title = 'Gestionar Pedidos';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['pedido_id']) && isset($_POST['estado'])) {
     $pedido_id = $_POST['pedido_id'];
     $nuevo_estado = $_POST['estado'];
-    
-    // Aquí también se podrían añadir más validaciones
-    
-    $stmt = $pdo->prepare("UPDATE pedidos SET estado = ? WHERE id = ?");
-    if ($stmt->execute([$nuevo_estado, $pedido_id])) {
-        header("Location: pedidos.php?mensaje=Estado del pedido actualizado.");
-        exit;
+
+    // El admin solo puede cambiar a "en proceso" o "entregado" o "pendiente"
+    if (!in_array($nuevo_estado, ['pendiente', 'en_proceso', 'entregado'])) {
+        $error = "Acción no permitida.";
     } else {
-        $error = "Error al actualizar el estado.";
+        $stmt = $pdo->prepare("UPDATE pedidos SET estado = ? WHERE id = ?");
+        if ($stmt->execute([$nuevo_estado, $pedido_id])) {
+            header("Location: pedidos.php?mensaje=Estado del pedido actualizado.");
+            exit;
+        } else {
+            $error = "Error al actualizar el estado.";
+        }
     }
 }
 

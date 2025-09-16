@@ -6,13 +6,13 @@
     <title><?php echo isset($page_title) ? $page_title . ' - ' : ''; ?>Admin - Mini Chic</title>
     
     <!-- Header específico para admin con rutas relativas correctas -->
-    <link rel="stylesheet" href="../assets/css/base.css">
-    <link rel="stylesheet" href="../assets/css/header.css">
-    <link rel="stylesheet" href="../assets/css/products.css">
-    <link rel="stylesheet" href="../assets/css/forms.css">
-    <link rel="stylesheet" href="../assets/css/cart.css">
-    <link rel="stylesheet" href="../assets/css/admin.css">
-    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link rel="stylesheet" href="/proyecto-01/assets/css/base.css">
+    <link rel="stylesheet" href="/proyecto-01/assets/css/header.css">
+    <link rel="stylesheet" href="/proyecto-01/assets/css/products.css">
+    <link rel="stylesheet" href="/proyecto-01/assets/css/forms.css">
+    <link rel="stylesheet" href="/proyecto-01/assets/css/cart.css">
+    <link rel="stylesheet" href="/proyecto-01/assets/css/admin.css">
+    <link rel="stylesheet" href="/proyecto-01/assets/css/responsive.css">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>

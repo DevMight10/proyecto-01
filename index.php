@@ -31,7 +31,7 @@ include 'includes/header.php';
             <div class="products-grid">
                 <?php foreach ($productos_destacados as $producto): ?>
                     <div class="product-card">
-                        <img src="uploads/productos/<?php echo $producto['imagen']; ?>" 
+                        <img src="public/<?php echo $producto['imagen']; ?>" 
                              alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
                         <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
                         <p class="price"><?php echo formatPrice($producto['precio']); ?></p>

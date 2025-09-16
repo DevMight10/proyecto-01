@@ -15,6 +15,26 @@ if (empty($_SESSION['carrito'])) {
 $mensaje = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirmar_pedido'])) {
+    
+    // 1. Pre-confirmación de stock
+    $errores_stock = [];
+    foreach ($_SESSION['carrito'] as $producto_id => $item) {
+        $stmt_stock = $pdo->prepare("SELECT nombre, stock FROM productos WHERE id = ?");
+        $stmt_stock->execute([$producto_id]);
+        $producto_db = $stmt_stock->fetch();
+
+        if (!$producto_db || $item['cantidad'] > $producto_db['stock']) {
+            $errores_stock[] = "No hay suficiente stock para \"{$item['nombre']}\". Disponibles: " . ($producto_db['stock'] ?? 0) . ".";
+        }
+    }
+
+    if (!empty($errores_stock)) {
+        $_SESSION['mensaje_error'] = implode('<br>', $errores_stock);
+        header('Location: carrito.php');
+        exit;
+    }
+
+    // 2. Procesar el pedido si hay stock
     try {
         $pdo->beginTransaction();
         
@@ -27,23 +47,33 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['confirmar_pedido'])) {
         $stmt->execute([$usuario_id, $numero_pedido, $total]);
         $pedido_id = $pdo->lastInsertId();
         
-        // Agregar detalles del pedido
+        // Agregar detalles del pedido y actualizar stock
         foreach ($_SESSION['carrito'] as $producto_id => $item) {
+            // Insertar detalle
             $subtotal = $item['precio'] * $item['cantidad'];
-            $stmt = $pdo->prepare("INSERT INTO pedido_detalles (pedido_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, ?, ?, ?, ?)");
-            $stmt->execute([$pedido_id, $producto_id, $item['cantidad'], $item['precio'], $subtotal]);
+            $stmt_detalle = $pdo->prepare("INSERT INTO pedido_detalles (pedido_id, producto_id, cantidad, precio_unitario, subtotal) VALUES (?, ?, ?, ?, ?)");
+            $stmt_detalle->execute([$pedido_id, $producto_id, $item['cantidad'], $item['precio'], $subtotal]);
+
+            // Actualizar stock
+            $stmt_stock_update = $pdo->prepare("UPDATE productos SET stock = stock - ? WHERE id = ?");
+            $stmt_stock_update->execute([$item['cantidad'], $producto_id]);
         }
         
         $pdo->commit();
         
-        // Limpiar carrito
+        // Limpiar carrito de la sesión
         unset($_SESSION['carrito']);
+
+        // Limpiar carrito de la base de datos
+        $stmt_clear = $pdo->prepare("DELETE FROM carrito_items WHERE usuario_id = ?");
+        $stmt_clear->execute([$usuario_id]);
         
         $mensaje = "Pedido confirmado exitosamente. Número de pedido: $numero_pedido";
         
     } catch (Exception $e) {
         $pdo->rollback();
         $mensaje = "Error al procesar el pedido. Inténtalo nuevamente.";
+        // Opcional: loggear el error $e->getMessage()
     }
 }
 
@@ -73,7 +103,7 @@ include 'includes/header.php';
                 <div class="order-items">
                     <?php foreach ($_SESSION['carrito'] as $producto_id => $item): ?>
                         <div class="order-item">
-                            <img src="uploads/productos/<?php echo $item['imagen']; ?>" 
+                            <img src="public/<?php echo $item['imagen']; ?>" 
                                  alt="<?php echo htmlspecialchars($item['nombre']); ?>">
                             <div class="item-details">
                                 <h3><?php echo htmlspecialchars($item['nombre']); ?></h3>

@@ -1,39 +1,4 @@
-// Función para agregar productos al carrito via AJAX
-function addToCart(productId) {
-  fetch("ajax/add_to_cart.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: "producto_id=" + productId,
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      if (data.success) {
-        // Actualizar contador del carrito
-        updateCartCounter()
-        showNotification("Producto agregado al carrito", "success")
-      } else {
-        showNotification(data.message || "Error al agregar producto", "error")
-      }
-    })
-    .catch((error) => {
-      console.error("Error:", error)
-      showNotification("Error al agregar producto", "error")
-    })
-}
 
-// Actualizar contador del carrito
-function updateCartCounter() {
-  fetch("ajax/get_cart_count.php")
-    .then((response) => response.json())
-    .then((data) => {
-      const cartLinks = document.querySelectorAll('a[href="carrito.php"]')
-      cartLinks.forEach((link) => {
-        link.innerHTML = '<i class="fas fa-shopping-cart"></i> Carrito (' + data.count + ")"
-      })
-    })
-}
 
 // Mostrar notificaciones
 function showNotification(message, type) {
@@ -80,8 +45,6 @@ document.head.appendChild(style)
 
 // Inicializar cuando el DOM esté listo
 document.addEventListener("DOMContentLoaded", () => {
-  // Actualizar contador del carrito al cargar la página
-  updateCartCounter()
 
   // Confirmar antes de eliminar elementos
   const deleteButtons = document.querySelectorAll(".btn-danger")

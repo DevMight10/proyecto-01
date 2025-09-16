@@ -20,17 +20,7 @@ if (!$producto) {
 
 $page_title = $producto['nombre'];
 
-// Manejar agregar al carrito
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['add_to_cart'])) {
-    if (!isLoggedIn()) {
-        header('Location: login.php?redirect=' . urlencode($_SERVER['REQUEST_URI']));
-        exit();
-    }
-    
-    $cantidad = isset($_POST['cantidad']) ? (int)$_POST['cantidad'] : 1;
-    addToCart($producto['id'], $producto['nombre'], $producto['precio'], $producto['imagen'], $cantidad);
-    $mensaje = "Producto agregado al carrito";
-}
+
 
 include 'includes/header.php';
 ?>
@@ -43,7 +33,7 @@ include 'includes/header.php';
         
         <div class="product-detail">
             <div class="product-image">
-                <img src="uploads/productos/<?php echo $producto['imagen']; ?>" 
+                <img src="public/<?php echo $producto['imagen']; ?>" 
                      alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
             </div>
             
@@ -56,17 +46,33 @@ include 'includes/header.php';
                     <h3>Descripción</h3>
                     <p><?php echo nl2br(htmlspecialchars($producto['descripcion'])); ?></p>
                 </div>
+
+                <p class="stock <?php echo ($producto['stock'] <= 5 && $producto['stock'] > 0) ? 'low-stock' : ''; ?>">
+                    <?php 
+                        if ($producto['stock'] > 0) {
+                            echo 'Disponibles: ' . $producto['stock'];
+                        } else {
+                            echo '<span class="out-of-stock">Agotado</span>';
+                        }
+                    ?>
+                </p>
                 
                 <?php if (isLoggedIn()): ?>
-                    <form method="POST" class="add-to-cart-form">
-                        <div class="quantity-selector">
-                            <label for="cantidad">Cantidad:</label>
-                            <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="10">
-                        </div>
-                        <button type="submit" name="add_to_cart" class="btn btn-primary">
-                            <i class="fas fa-cart-plus"></i> Agregar al Carrito
-                        </button>
-                    </form>
+                    <?php if ($producto['stock'] > 0): ?>
+                        <form action="agregar_al_carrito.php" method="POST" class="add-to-cart-form">
+                            <input type="hidden" name="id" value="<?php echo $producto['id']; ?>">
+                            <input type="hidden" name="return_url" value="<?php echo $_SERVER['REQUEST_URI']; ?>">
+                            <div class="quantity-selector">
+                                <label for="cantidad">Cantidad:</label>
+                                <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="<?php echo $producto['stock']; ?>">
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-cart-plus"></i> Agregar al Carrito
+                            </button>
+                        </form>
+                    <?php else: ?>
+                        <p>Este producto no está disponible actualmente.</p>
+                    <?php endif; ?>
                 <?php else: ?>
                     <a href="login.php?redirect=<?php echo urlencode($_SERVER['REQUEST_URI']); ?>" 
                        class="btn btn-primary">Inicia sesión para comprar</a>

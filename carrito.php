@@ -7,30 +7,69 @@ requireLogin();
 
 $page_title = 'Carrito de Compras';
 
-// Manejar acciones del carrito
+// Manejar acciones del carrito y sincronizar con la BD
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $usuario_id = $_SESSION['usuario_id'];
+
+    // --- Acción: Actualizar Cantidad ---
     if (isset($_POST['update_quantity'])) {
         $producto_id = $_POST['producto_id'];
         $nueva_cantidad = (int)$_POST['cantidad'];
         
-        if ($nueva_cantidad > 0) {
+        // Obtener stock del producto
+        $stmt_stock = $pdo->prepare("SELECT stock FROM productos WHERE id = ?");
+        $stmt_stock->execute([$producto_id]);
+        $stock_disponible = $stmt_stock->fetchColumn();
+
+        if ($nueva_cantidad > $stock_disponible) {
+            $_SESSION['mensaje_error'] = "No hay suficiente stock para \"{$_SESSION['carrito'][$producto_id]['nombre']}\". Disponibles: {$stock_disponible}.";
+        } elseif ($nueva_cantidad > 0) {
             $_SESSION['carrito'][$producto_id]['cantidad'] = $nueva_cantidad;
+            // Sincronizar con BD
+            $stmt = $pdo->prepare("UPDATE carrito_items SET cantidad = ? WHERE usuario_id = ? AND producto_id = ?");
+            $stmt->execute([$nueva_cantidad, $usuario_id, $producto_id]);
         } else {
             unset($_SESSION['carrito'][$producto_id]);
+            // Sincronizar con BD
+            $stmt = $pdo->prepare("DELETE FROM carrito_items WHERE usuario_id = ? AND producto_id = ?");
+            $stmt->execute([$usuario_id, $producto_id]);
         }
     }
     
+    // --- Acción: Eliminar Producto ---
     if (isset($_POST['remove_item'])) {
         $producto_id = $_POST['producto_id'];
         unset($_SESSION['carrito'][$producto_id]);
+        // Sincronizar con BD
+        $stmt = $pdo->prepare("DELETE FROM carrito_items WHERE usuario_id = ? AND producto_id = ?");
+        $stmt->execute([$usuario_id, $producto_id]);
     }
     
+    // --- Acción: Vaciar Carrito ---
     if (isset($_POST['clear_cart'])) {
         unset($_SESSION['carrito']);
+        // Sincronizar con BD
+        $stmt = $pdo->prepare("DELETE FROM carrito_items WHERE usuario_id = ?");
+        $stmt->execute([$usuario_id]);
     }
+
+    // Redirigir a la misma página para evitar reenvío de formulario
+    header('Location: carrito.php');
+    exit;
 }
 
 $carrito_vacio = !isset($_SESSION['carrito']) || empty($_SESSION['carrito']);
+
+// Obtener stock para los productos en el carrito
+if (!$carrito_vacio) {
+    $product_ids = array_keys($_SESSION['carrito']);
+    $placeholders = implode(',', array_fill(0, count($product_ids), '?'));
+    
+    $stmt_stocks = $pdo->prepare("SELECT id, stock FROM productos WHERE id IN ($placeholders)");
+    $stmt_stocks->execute($product_ids);
+    $stocks = $stmt_stocks->fetchAll(PDO::FETCH_KEY_PAIR);
+}
+
 
 include 'includes/header.php';
 ?>
@@ -38,6 +77,11 @@ include 'includes/header.php';
 <main>
     <div class="container">
         <h1>Carrito de Compras</h1>
+
+        <?php if (isset($_SESSION['mensaje_error'])):
+            ?><div class="alert alert-danger"><?php echo $_SESSION['mensaje_error']; ?></div>
+            <?php unset($_SESSION['mensaje_error']); ?>
+        <?php endif; ?>
         
         <?php if ($carrito_vacio): ?>
             <div class="empty-cart">
@@ -46,9 +90,12 @@ include 'includes/header.php';
             </div>
         <?php else: ?>
             <div class="cart-items">
-                <?php foreach ($_SESSION['carrito'] as $producto_id => $item): ?>
+                <?php foreach ($_SESSION['carrito'] as $producto_id => $item):
+                    // Check if stock information is available for the current product
+                    $max_quantity = $stocks[$producto_id] ?? 1; // Default to 1 if stock not found
+                    ?>
                     <div class="cart-item">
-                        <img src="uploads/productos/<?php echo $item['imagen']; ?>" 
+                        <img src="public/<?php echo $item['imagen']; ?>" 
                              alt="<?php echo htmlspecialchars($item['nombre']); ?>">
                         
                         <div class="cart-item-info">
@@ -61,7 +108,7 @@ include 'includes/header.php';
                                 <input type="hidden" name="producto_id" value="<?php echo $producto_id; ?>">
                                 <div class="quantity-controls">
                                     <input type="number" name="cantidad" value="<?php echo $item['cantidad']; ?>" 
-                                           min="1" max="10">
+                                           min="1" max="<?php echo $max_quantity; ?>">
                                     <button type="submit" name="update_quantity" class="btn btn-secondary">
                                         Actualizar
                                     </button>
@@ -186,6 +233,17 @@ include 'includes/header.php';
 
 .btn-danger:hover {
     background-color: #c82333;
+}
+
+.alert {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+}
+.alert-danger {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
 }
 </style>
 

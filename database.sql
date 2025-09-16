@@ -38,7 +38,7 @@ CREATE TABLE pedidos (
     usuario_id INT NOT NULL,
     numero_pedido VARCHAR(20) UNIQUE NOT NULL,
     total DECIMAL(10,2) NOT NULL,
-    estado ENUM('pendiente', 'en_proceso', 'entregado') DEFAULT 'pendiente',
+    estado ENUM('pendiente', 'en_proceso', 'entregado', 'cancelado') DEFAULT 'pendiente',
     fecha_pedido TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     fecha_actualizacion TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     actualizado_por INT,
@@ -58,7 +58,6 @@ CREATE TABLE pedido_detalles (
     FOREIGN KEY (producto_id) REFERENCES productos(id)
 );
 
--- Tabla de mensajes de contacto
 CREATE TABLE mensajes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -67,6 +66,18 @@ CREATE TABLE mensajes (
     mensaje TEXT NOT NULL,
     leido BOOLEAN DEFAULT FALSE,
     fecha_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Tabla para persistir los productos del carrito de cada usuario
+CREATE TABLE carrito_items (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    usuario_id INT NOT NULL,
+    producto_id INT NOT NULL,
+    cantidad INT NOT NULL DEFAULT 1,
+    agregado_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE,
+    FOREIGN KEY (producto_id) REFERENCES productos(id) ON DELETE CASCADE,
+    UNIQUE KEY `usuario_producto` (`usuario_id`, `producto_id`)
 );
 
 -- Insertar categorías iniciales

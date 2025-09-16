@@ -53,20 +53,33 @@ include 'includes/header.php';
         <div class="products-grid">
             <?php foreach ($productos as $producto): ?>
                 <div class="product-card">
-                    <img src="uploads/productos/<?php echo $producto['imagen']; ?>" 
+                    <img src="public/<?php echo $producto['imagen']; ?>" 
                          alt="<?php echo htmlspecialchars($producto['nombre']); ?>">
                     <div class="product-info">
                         <h3><?php echo htmlspecialchars($producto['nombre']); ?></h3>
                         <p class="category"><?php echo htmlspecialchars($producto['categoria_nombre']); ?></p>
                         <p class="price"><?php echo formatPrice($producto['precio']); ?></p>
+                        <p class="stock <?php echo ($producto['stock'] <= 5 && $producto['stock'] > 0) ? 'low-stock' : ''; ?>">
+                            <?php 
+                                if ($producto['stock'] > 0) {
+                                    echo 'Disponibles: ' . $producto['stock'];
+                                } else {
+                                    echo '<span class="out-of-stock">Agotado</span>';
+                                }
+                            ?>
+                        </p>
                         <div class="product-actions">
                             <a href="producto_detalle.php?id=<?php echo $producto['id']; ?>" 
                                class="btn btn-secondary">Ver Detalles</a>
                             <?php if (isLoggedIn()): ?>
-                                <button onclick="addToCart(<?php echo $producto['id']; ?>)" 
-                                        class="btn btn-primary">
-                                    <i class="fas fa-cart-plus"></i> Agregar
-                                </button>
+                                <?php if ($producto['stock'] > 0): ?>
+                                    <a href="agregar_al_carrito.php?id=<?php echo $producto['id']; ?>" 
+                                            class="btn btn-primary">
+                                        <i class="fas fa-cart-plus"></i> Agregar
+                                    </a>
+                                <?php else: ?>
+                                    <button class="btn btn-primary" disabled>Agotado</button>
+                                <?php endif; ?>
                             <?php else: ?>
                                 <a href="login.php" class="btn btn-primary">Inicia sesión para comprar</a>
                             <?php endif; ?>
