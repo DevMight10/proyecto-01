@@ -24,6 +24,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include 'includes/header.php';
 ?>
 
+<link rel="stylesheet" href="assets/css/contacto.css">
+
 <main>
     <div class="container">
         <h1>Contacto</h1>
@@ -110,50 +112,7 @@ include 'includes/header.php';
 </main>
 
 <style>
-.contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin: 2rem 0;
-}
 
-.contact-info,
-.contact-form {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.contact-item {
-    display: flex;
-    align-items: flex-start;
-    margin-bottom: 2rem;
-}
-
-.contact-item i {
-    font-size: 1.5rem;
-    color: var(--primary-color);
-    margin-right: 1rem;
-    margin-top: 0.25rem;
-}
-
-.contact-item h3 {
-    margin-bottom: 0.5rem;
-    color: var(--text-color);
-}
-
-.contact-item p {
-    color: var(--gray-medium);
-    margin: 0;
-}
-
-@media (max-width: 768px) {
-    .contact-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
 </style>
 
 <?php include 'includes/footer.php'; ?>

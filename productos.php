@@ -32,6 +32,9 @@ $categorias = $stmt_cat->fetchAll();
 include 'includes/header.php';
 ?>
 
+<link rel="stylesheet" href="assets/css/lista-productos.css">
+<link rel="stylesheet" href="assets/css/global.css">
+
 <main>
     <div class="container">
         <h1>Nuestros Productos</h1>

@@ -41,28 +41,5 @@
 
             </div>
         </div>
-            <!-- <div class="nav-brand">
-                <h1>Mini Chic</h1>
-            </div>
-
-            <nav class="nav-menu">
-                <a href="index.php">Inicio</a>
-                <a href="productos.php">Productos</a>
-                <a href="contacto.php">Contacto</a>
-                <?php if (isLoggedIn()): ?>
-                    <a href="carrito.php">
-                        <i class="fas fa-shopping-cart"></i> 
-                        Carrito (<?php echo getCartItemCount(); ?>)
-                    </a>
-                    <a href="mis_pedidos.php">Mis Pedidos</a>
-                    <?php if (isAdmin()): ?>
-                        <a href="admin/">Admin</a>
-                    <?php endif; ?>
-                    <a href="admin/logout.php">Salir</a>
-                <?php else: ?>
-                    <a href="login.php">Iniciar Sesión</a>
-                    <a href="registro.php">Registrarse</a>
-                <?php endif; ?>
-            </nav> -->
-        </div>
     </header>
+</body>

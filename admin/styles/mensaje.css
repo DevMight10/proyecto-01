@@ -1,0 +1,117 @@
+/* ====== Admin: Mensajes ====== */
+
+/* Contenedor responsive de la tabla */
+.table-responsive{
+  background: #fff;
+  border: 1px solid #E9EFEC;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  overflow: hidden;
+  overflow-x: auto; /* scroll horizontal si es necesario */
+}
+
+/* Tabla base */
+.table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Encabezado pegado */
+.table thead th{
+  position: sticky; top: 0; z-index: 1;
+  background: #fff;
+  padding: 12px 14px;
+  font-size: .9rem;
+  color: #6d7a73;
+  text-align: left;
+  border-bottom: 1px solid #E9EFEC;
+}
+
+/* Celdas */
+.table tbody td{
+  padding: 12px 14px;
+  vertical-align: top;
+  border-bottom: 1px solid #F0F4F2;
+}
+.table tbody tr:hover{ background: #F6FAF8; }
+.table tbody tr:last-child td{ border-bottom: 0; }
+
+/* Anchos sugeridos por columna */
+.table th:nth-child(1), .table td:nth-child(1){ width: 220px; } /* De */
+.table th:nth-child(4), .table td:nth-child(4){ width: 160px; } /* Fecha */
+.table th:nth-child(5), .table td:nth-child(5){ width: 110px; } /* Estado */
+.table th:nth-child(6), .table td:nth-child(6){ width: 150px; } /* Acciones */
+
+/* Email en pequeño */
+.table td small{ color:#6d7a73; }
+
+/* Mensaje: truncado a 3 líneas para no romper layout */
+.table td:nth-child(3){
+  max-width: 520px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+/* Resaltado por estado de lectura */
+.mensaje-nuevo{
+  box-shadow: inset 4px 0 0 0 #007B44;  /* barra verde a la izquierda */
+  background: #F2FBF6;
+}
+
+/* Badges */
+.badge{
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .9rem;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge-success{
+  background: #EAF6EF;
+  color: #1f6a44;
+  border-color: #CFEBDD;
+}
+.badge-secondary{
+  background: #EDF1F0;
+  color: #42524b;
+  border-color: #DFE7E4;
+}
+
+/* Controles en Acciones */
+.btn-sm{ padding: 6px 10px; border-radius: 10px; font-size: .92rem; }
+
+/* Variantes (apoyadas en tu .btn global) */
+.btn-info{
+  background:#EEF3F1; color:#1f3029; border:1px solid #DFE7E4; box-shadow:none;
+}
+.btn-info:hover{ background:#E6EFEB; }
+
+.btn-danger{
+  background:#B00020; color:#fff; border:0; box-shadow:none;
+}
+.btn-danger:hover{ background:#8E0019; }
+
+/* Ajuste del pequeño form inline en acciones */
+.table td form select.form-control{
+  padding: .45rem .6rem;
+  border: 2px solid #DFE7E4;
+  border-radius: 10px;
+  background:#fff;
+  font-size: .95rem;
+}
+.table td form select.form-control:focus{
+  outline: none;
+  border-color: #007B44;
+  box-shadow: 0 0 0 4px rgba(0,123,68,.12);
+}
+
+/* Responsive */
+@media (max-width: 640px){
+  .table th:nth-child(6), .table td:nth-child(6){ min-width: 150px; }
+  .table td:nth-child(3){ max-width: 360px; }
+}

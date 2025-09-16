@@ -29,6 +29,7 @@ $productos = $stmt->fetchAll();
 
 include 'includes/admin_header.php';
 ?>
+<link rel="stylesheet" href="/proyecto-01/admin/styles/productos.css">
 
 <main class="container">
     <h1>Gestión de Productos</h1>
@@ -90,4 +91,5 @@ include 'includes/admin_header.php';
     </div>
 </main>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'includes/admin_footer.php'; ?>  
+

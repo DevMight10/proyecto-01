@@ -1,0 +1,33 @@
+/* Footer admin simple */
+.admin-footer{
+  background: #fff;
+  border-top: 1px solid #EAEFED;
+  padding: 12px 0;
+  font-size: .95rem;
+  color: #4a5a53;
+}
+
+.admin-footer .container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.admin-footer .footer-links a{
+  color: #2b2b2b;
+  text-decoration: none;
+  font-weight: 600;
+}
+.admin-footer .footer-links a:hover{
+  color: #007B44; /* tu verde */
+  text-decoration: underline;
+}
+
+@media (max-width: 640px){
+  .admin-footer .container{
+    justify-content: center;
+    text-align: center;
+  }
+}

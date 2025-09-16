@@ -67,6 +67,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 include 'includes/admin_header.php';
 ?>
 
+<link rel="stylesheet" href="/proyecto-01/admin/styles/editar.css">
+
 <main class="container">
     <h1>Editar Producto</h1>
     
@@ -132,4 +134,5 @@ include 'includes/admin_header.php';
     </form>
 </main>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'includes/admin_footer.php'; ?>  
+

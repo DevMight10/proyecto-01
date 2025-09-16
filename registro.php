@@ -39,6 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 include 'includes/header.php';
 ?>
 
+<link rel="stylesheet" href="assets/css/registro.css">
+
 <main>
     <div class="container">
         <div class="auth-form">

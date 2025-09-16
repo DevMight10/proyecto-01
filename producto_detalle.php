@@ -24,6 +24,8 @@ $page_title = $producto['nombre'];
 
 include 'includes/header.php';
 ?>
+<link rel="stylesheet" href="assets/css/producto-detalle.css">
+
 
 <main>
     <div class="container">
@@ -82,50 +84,5 @@ include 'includes/header.php';
     </div>
 </main>
 
-<style>
-.product-detail {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-    margin: 2rem 0;
-}
-
-.product-image img {
-    width: 100%;
-    border-radius: 15px;
-}
-
-.product-info h1 {
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.product-description {
-    margin: 2rem 0;
-}
-
-.add-to-cart-form {
-    margin-top: 2rem;
-}
-
-.quantity-selector {
-    margin-bottom: 1rem;
-}
-
-.quantity-selector input {
-    width: 80px;
-    padding: 0.5rem;
-    border: 2px solid #e9ecef;
-    border-radius: 5px;
-    margin-left: 1rem;
-}
-
-@media (max-width: 768px) {
-    .product-detail {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-}
-</style>
 
 <?php include 'includes/footer.php'; ?>

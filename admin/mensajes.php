@@ -36,6 +36,8 @@ $mensajes = $stmt->fetchAll();
 include 'includes/admin_header.php';
 ?>
 
+<link rel="stylesheet" href="/proyecto-01/admin/styles/mensaje.css">
+
 <main class="container">
     <h1>Mensajes de Contacto</h1>
     
@@ -87,14 +89,6 @@ include 'includes/admin_header.php';
     </div>
 </main>
 
-<style>
-.mensaje-nuevo {
-    font-weight: bold;
-}
-.mensaje-leido {
-    background-color: #f8f9fa; /* Un color de fondo sutil para los leídos */
-    color: #6c757d;
-}
-</style>
 
-<?php include '../includes/footer.php'; ?>
+<?php include 'includes/admin_footer.php'; ?>  
+

@@ -1,0 +1,87 @@
+/* ====== Auth / Login ====== */
+.auth-form{
+  width: min(100%, 420px);
+  margin: clamp(32px, 6vh, 64px) auto;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0,0,0,.10);
+  padding: clamp(18px, 3vw, 26px);
+  text-align: left;
+}
+
+.auth-form h1{
+  font-size: 1.6rem;
+  line-height: 1.2;
+  margin: 0 0 14px;
+  color: #222;
+}
+
+/* Reutiliza tu patrón de formularios pero scopeado a .auth-form */
+.auth-form .form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.auth-form label{
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.auth-form input[type="email"],
+.auth-form input[type="password"]{
+  width: 100%;
+  padding: .65rem .8rem;
+  border: 2px solid #DFE7E4;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 1rem;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.auth-form input::placeholder{ color: #9aa7a1; }
+
+.auth-form input:focus{
+  outline: none;
+  border-color: #007B44;                 /* tu verde */
+  box-shadow: 0 0 0 4px rgba(0,123,68,.12);
+}
+
+/* Botón: usa tu .btn/.btn-primary */
+.auth-form .btn{
+  width: 100%;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+/* Texto auxiliar / enlaces */
+.auth-form p{
+  margin-top: 14px;
+  color: #4a5a53;
+  text-align: center;
+}
+.auth-form p a{
+  color: #007B44;
+  font-weight: 700;
+  text-decoration: none;
+}
+.auth-form p a:hover{ text-decoration: underline; }
+
+/* Alertas de error (compatibles con tu lógica) */
+.alert{
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  margin: 10px 0 14px;
+  font-weight: 600;
+}
+.alert-error{
+  background: #FCEBEC;
+  color: #8e1b1b;
+  border-color: #F4C7CB;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 480px){
+  .auth-form{ box-shadow: 0 6px 16px rgba(0,0,0,.08); }
+}

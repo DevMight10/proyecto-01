@@ -1,0 +1,104 @@
+/* ====== Header Admin (minimal) ====== */
+.header{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  border-bottom: 1px solid #EAEFED;   /* línea sutil */
+  box-shadow: none;                    /* sin sombras */
+}
+
+.header .container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding-block: 10px;                 /* menos alto */
+}
+
+/* Marca */
+.nav-brand h1{
+  margin: 0;
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: #007B44;
+  font-weight: 800;
+}
+.nav-brand p{
+  margin: 2px 0 0;
+  font-size: .9rem;
+  color: #6d7a73;
+}
+
+/* Menú en modo texto */
+.nav-menu{
+  display: flex;
+  gap: 22px;                           /* espacio entre links */
+  flex-wrap: wrap;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 2px;                 /* para focus/underline */
+}
+
+/* enlaces “naked” */
+.nav-menu a{
+  position: relative;
+  padding: 6px 0;                      /* sin fondo, sin bordes */
+  border: 0;
+  background: transparent;
+  border-radius: 0;
+  color: #2b2b2b;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .15s ease, opacity .15s ease;
+}
+
+/* subrayado al hover/focus (animado) */
+.nav-menu a::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -6px;
+  height: 2px;
+  background: var(--primary-color, #007B44);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .18s ease;
+}
+.nav-menu a:hover{
+  color: var(--primary-color, #007B44);
+}
+
+
+/* activo */
+.nav-menu a.active,
+.nav-menu a[aria-current="page"]{
+  color: var(--primary-color, #007B44);
+}
+.nav-menu a.active::after,
+.nav-menu a[aria-current="page"]::after{
+  transform: scaleX(1);
+}
+
+/* “Salir”: solo color, sin pastillas */
+.nav-menu a[href$="logout.php"]{
+  color: #B00020;
+}
+.nav-menu a[href$="logout.php"]::after{
+  background: #B00020;
+}
+.nav-menu a[href$="logout.php"]:hover{
+  opacity: .9;
+}
+
+/* Accesibilidad */
+.nav-menu a:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0,123,68,.14);
+  border-radius: 6px;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .header .container{ flex-direction: column; align-items: stretch; }
+  .nav-brand{ text-align: center; }
+  .nav-menu{ justify-content: center; gap: 16px; }
+}

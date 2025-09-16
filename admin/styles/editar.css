@@ -1,0 +1,113 @@
+/* ====== Editar Producto ====== */
+
+/* Espaciado rápido */
+.mb-3{ margin-bottom: 1rem; }
+.mt-2{ margin-top: .5rem; }
+
+/* Contenedor del formulario como “card” */
+.form-container{
+  background: #fff;
+  border: 1px solid #E9EFEC;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  padding: clamp(16px, 2.5vw, 24px);
+  width: min(100%, 900px);
+  margin: 10px auto 32px;
+  display: grid;
+  gap: 14px;
+}
+
+/* Grids en desktop (2 columnas) */
+@media (min-width: 900px){
+  .form-container{
+    grid-template-columns: 1fr 1fr;
+  }
+  /* Que textarea, archivo, checkbox y botón ocupen el ancho completo */
+  .form-container .form-group:has(textarea),
+  .form-container .form-group:has(input[type="file"]),
+  .form-container .form-check,
+  .form-container > .btn{ grid-column: 1 / -1; }
+}
+
+/* Grupos y etiquetas */
+.form-group{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-group label{
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+/* Controles */
+.form-control{
+  width: 100%;
+  padding: .65rem .8rem;
+  border: 2px solid #DFE7E4;
+  border-radius: 12px;
+  background: #fff;
+  font-size: 1rem;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.form-control:focus{
+  outline: none;
+  border-color: #007B44;
+  box-shadow: 0 0 0 4px rgba(0,123,68,.12);
+}
+textarea.form-control{
+  min-height: 130px;
+  resize: vertical;
+}
+
+/* Select igual que input */
+select.form-control{
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #6d7a73 50%),
+                    linear-gradient(135deg, #6d7a73 50%, transparent 50%);
+  background-position: calc(100% - 18px) calc(50% - 3px),
+                       calc(100% - 12px) calc(50% - 3px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* Zona de imagen actual */
+.form-group img{
+  width: 140px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  border: 1px solid #E9EFEC;
+  box-shadow: 0 6px 14px rgba(0,0,0,.06);
+  display: block;
+}
+
+/* Checkbox “Producto Activo” */
+.form-check{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 6px;
+}
+.form-check-input{
+  width: 18px; height: 18px;
+  border-radius: 6px;
+  accent-color: #007B44;   /* moderno y simple */
+}
+.form-check-label{ color: #2b2b2b; font-weight: 600; }
+
+/* Botón (usa tu .btn/.btn-primary existentes) */
+.form-container .btn{
+  align-self: start;
+  min-width: 220px;
+}
+
+/* Alertas si no las tienes definidas */
+.alert{
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  margin: 12px 0;
+  font-weight: 600;
+}
+.alert-danger{ background:#FCEBEC; color:#8e1b1b; border-color:#F4C7CB; }

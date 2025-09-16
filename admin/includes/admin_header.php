@@ -6,13 +6,8 @@
     <title><?php echo isset($page_title) ? $page_title . ' - ' : ''; ?>Admin - Mini Chic</title>
     
     <!-- Header específico para admin con rutas relativas correctas -->
-    <link rel="stylesheet" href="/proyecto-01/assets/css/base.css">
-    <link rel="stylesheet" href="/proyecto-01/assets/css/header.css">
-    <link rel="stylesheet" href="/proyecto-01/assets/css/products.css">
-    <link rel="stylesheet" href="/proyecto-01/assets/css/forms.css">
-    <link rel="stylesheet" href="/proyecto-01/assets/css/cart.css">
-    <link rel="stylesheet" href="/proyecto-01/assets/css/admin.css">
-    <link rel="stylesheet" href="/proyecto-01/assets/css/responsive.css">
+    <link rel="stylesheet" href="/proyecto-01/admin/styles/header.css">
+    <link rel="stylesheet" href="/proyecto-01/assets/css/global.css">
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -20,7 +15,7 @@
     <header class="header">
         <div class="container">
             <div class="nav-brand">
-                <h1><i class="fas fa-baby"></i> Mini Chic - Admin</h1>
+                <h1>Mini Chic - Admin</h1>
                 <p>Panel de Administración</p>
             </div>
             <nav class="nav-menu">
@@ -33,3 +28,4 @@
             </nav>
         </div>
     </header>
+</body>

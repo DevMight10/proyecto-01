@@ -1,0 +1,128 @@
+/* ====== Admin: Pedidos ====== */
+
+/* Alertas (si ya las tienes definidas puedes omitir) */
+.alert{
+  padding: 12px 14px; border-radius: 10px; border: 1px solid transparent;
+  margin: 12px 0; font-weight: 600;
+}
+.alert-success{ background:#EAF6EF; color:#1f6a44; border-color:#CFEBDD; }
+.alert-danger { background:#FCEBEC; color:#8e1b1b; border-color:#F4C7CB; }
+
+/* Contenedor responsive de la tabla */
+.table-responsive{
+  background: #fff;
+  border: 1px solid #E9EFEC;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  overflow: hidden;
+  overflow-x: auto;               /* scroll en móvil si hace falta */
+}
+
+/* Tabla base */
+.table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Encabezado pegado */
+.table thead th{
+  position: sticky; top: 0; z-index: 1;
+  background: #fff;
+  padding: 12px 14px;
+  font-size: .9rem;
+  color: #6d7a73;
+  text-align: left;
+  border-bottom: 1px solid #E9EFEC;
+}
+
+/* Celdas */
+.table tbody td{
+  padding: 12px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid #F0F4F2;
+}
+.table tbody tr:hover{ background: #F6FAF8; }
+.table tbody tr:last-child td{ border-bottom: 0; }
+
+/* Anchos sugeridos por columna */
+.table th:nth-child(1), .table td:nth-child(1){ width: 120px; }  /* ID Pedido */
+.table th:nth-child(3), .table td:nth-child(3){ width: 160px; }  /* Fecha */
+.table th:nth-child(4), .table td:nth-child(4){ width: 120px; }  /* Total */
+.table th:nth-child(5), .table td:nth-child(5){ width: 130px; }  /* Estado */
+.table th:nth-child(6), .table td:nth-child(6){ width: 260px; }  /* Acciones */
+
+/* Cliente: email en pequeño/gris */
+.table td small{ color:#6d7a73; }
+
+/* Precio destacado en verde */
+.table td:nth-child(4){
+  color: #007B44;
+  font-weight: 700;
+}
+
+/* Badges de estado */
+.badge{
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .9rem;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge-pendiente{
+  background: #FFF4E6;
+  color: #b65900;
+  border-color: #FFE2BF;
+}
+.badge-en_proceso{
+  background: #EAF6EF;
+  color: #1f6a44;
+  border-color: #CFEBDD;
+}
+.badge-entregado{
+  background: #E6F4EA;
+  color: #0F6B3E;
+  border-color: #C8E7D3;
+}
+
+/* Controles en la columna Acciones */
+.form-control{
+  padding: .55rem .7rem;
+  border: 2px solid #DFE7E4;
+  border-radius: 10px;
+  background: #fff;
+  font-size: 1rem;
+  transition: border-color .15s, box-shadow .15s;
+}
+.form-control:focus{
+  outline: none;
+  border-color: #007B44;
+  box-shadow: 0 0 0 4px rgba(0,123,68,.12);
+}
+
+.form-control-sm{
+  padding: .45rem .6rem;
+  font-size: .95rem;
+  border-radius: 10px;
+}
+
+/* Select más claro y compacto */
+select.form-control{
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #6d7a73 50%),
+                    linear-gradient(135deg, #6d7a73 50%, transparent 50%);
+  background-position: calc(100% - 16px) calc(50% - 3px),
+                       calc(100% - 10px) calc(50% - 3px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+/* Botón pequeño “Actualizar” (apoya tu .btn global) */
+.btn-sm{ padding: 6px 10px; border-radius: 10px; font-size: .92rem; }
+
+/* Ajustes responsive */
+@media (max-width: 640px){
+  .table th:nth-child(6), .table td:nth-child(6){ min-width: 260px; }
+}

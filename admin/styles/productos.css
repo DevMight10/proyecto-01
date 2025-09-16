@@ -1,0 +1,96 @@
+/* Utilidad */
+.mb-3{ margin-bottom: 1rem; }
+
+/* Alertas (si no las tienes ya) */
+.alert{
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  margin: 12px 0;
+  font-weight: 600;
+}
+.alert-success{ background:#EAF6EF; color:#1f6a44; border-color:#CFEBDD; }
+.alert-danger { background:#FCEBEC; color:#8e1b1b; border-color:#F4C7CB; }
+
+/* Contenedor responsive de la tabla */
+.table-responsive{
+  background: #fff;
+  border: 1px solid #E9EFEC;
+  border-radius: 16px;
+  box-shadow: 0 10px 22px rgba(0,0,0,.06);
+  overflow: hidden;               /* redondeo visible */
+  overflow-x: auto;               /* scroll horizontal en móvil */
+}
+
+/* Tabla */
+.table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Encabezado fijo y limpio */
+.table thead th{
+  position: sticky; top: 0; z-index: 1;
+  background: #fff;
+  padding: 12px 14px;
+  font-size: .9rem;
+  color: #6d7a73;
+  text-align: left;
+  border-bottom: 1px solid #E9EFEC;
+}
+
+/* Celdas */
+.table tbody td{
+  padding: 12px 14px;
+  vertical-align: middle;
+  border-bottom: 1px solid #F0F4F2;
+}
+.table tbody tr:hover{ background: #F6FAF8; }
+.table tbody tr:last-child td{ border-bottom: 0; }
+
+/* Anchos útiles por columna */
+.table th:nth-child(1), .table td:nth-child(1){ width: 72px; }  /* ID */
+.table th:nth-child(2), .table td:nth-child(2){ width: 86px; }  /* Imagen */
+.table th:nth-child(8), .table td:nth-child(8){ width: 128px; } /* Acciones */
+
+/* Imagen */
+.table td img{
+  width: 56px; height: 56px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+/* Formato de precio y activo */
+.table td:nth-child(5){           /* Precio */
+  color: #007B44;
+  font-weight: 700;
+}
+.table td:nth-child(7){           /* Activo */
+  font-weight: 700;
+}
+
+/* Botones en acciones */
+.btn-sm{ padding: 6px 10px; border-radius: 10px; font-size: .92rem; }
+
+/* Variantes (apoyadas en tu .btn global) */
+.btn-secondary{
+  background:#EEF3F1; color:#1f3029;
+  border:1px solid #DFE7E4; box-shadow:none;
+}
+.btn-secondary:hover{ background:#E6EFEB; }
+
+.btn-danger{
+  background:#B00020; color:#fff; border:0; box-shadow:none;
+}
+.btn-danger:hover{ background:#8E0019; }
+
+/* Espaciado entre botones dentro de la celda */
+.table td .btn{ margin-right: 8px; }
+.table td .btn:last-child{ margin-right: 0; }
+
+/* Títulos y botón superior */
+main.container > h1{
+  font-size: 1.6rem; color:#222; margin: 8px 0 16px;
+}
