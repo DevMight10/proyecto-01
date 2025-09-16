@@ -32,7 +32,7 @@ function getCartItemCount() {
     <header class="header">
         <div class="container">
             <div class="nav-brand">
-                <h1><i class="fas fa-baby"></i> Mini Chic</h1>
+                <h1><i class="fas fa-baby"></i> Mini Chic asdf  fdasa</h1>
                 <p>Ropa adorable para tu bebé</p>
             </div>
             <nav class="nav-menu">

@@ -5,24 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo isset($page_title) ? $page_title . ' - ' : ''; ?>Mini Chic - Ropa de Bebé</title>
     
-    <!-- Reemplazando archivo CSS único por archivos modulares -->
-    <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/header.css">
-    <link rel="stylesheet" href="assets/css/products.css">
-    <link rel="stylesheet" href="assets/css/forms.css">
-    <link rel="stylesheet" href="assets/css/cart.css">
-    <link rel="stylesheet" href="assets/css/admin.css">
-    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+
     
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
     <header class="header">
         <div class="container">
-            <div class="nav-brand">
-                <h1><i class="fas fa-baby"></i> Mini Chic</h1>
-                <p>Ropa adorable para tu bebé</p>
+            <div class="logo">                                                      
+                <h3 class="logo-text">Mini Chic</h3>
             </div>
+
+            <div class="nav-menu">
+                <a href="index.php">Inicio</a>
+                <a href="productos.php">Productos</a>
+                <a href="contacto.php">Contacto</a>
+            </div>
+
+            <div class="nav-right">
+                <?php if (isLoggedIn()): ?>
+                    <a href="carrito.php" class="opcion">
+                        <i class="fas fa-shopping-cart"></i> 
+                        Carrito <?php echo getCartItemCount(); ?>
+                    </a>
+                    <?php if (isAdmin()): ?>
+                        <a href="admin/index.php" class="opcion">Admin</a>
+                    <?php endif; ?>
+                    <a href="admin/logout.php" class="opcion">Salir</a>
+                <?php else: ?>
+                    <a href="login.php" id="iniciar-sesion">Iniciar Sesión</a>
+                    <a href="registro.php" id="registro">Registrarse</a>
+                <?php endif; ?>
+
+            </div>
+        </div>
+            <!-- <div class="nav-brand">
+                <h1>Mini Chic</h1>
+            </div>
+
             <nav class="nav-menu">
                 <a href="index.php">Inicio</a>
                 <a href="productos.php">Productos</a>
@@ -40,6 +62,6 @@
                     <a href="login.php">Iniciar Sesión</a>
                     <a href="registro.php">Registrarse</a>
                 <?php endif; ?>
-            </nav>
+            </nav> -->
         </div>
     </header>
