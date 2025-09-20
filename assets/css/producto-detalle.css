@@ -2,6 +2,8 @@
    DETALLE DE PRODUCTO (mejorado)
    =============================== */
 
+   main { height:  80vh; }
+
 /* Grid principal */
 .product-detail{
   display: grid;
