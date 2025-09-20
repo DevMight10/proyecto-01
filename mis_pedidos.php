@@ -151,6 +151,8 @@ include 'includes/header.php';
 </main>
 
 <style>
+    main{ height: 85vh; }
+
 .accordion { width: 100%; }
 .accordion-item { border-bottom: 1px solid #eee; }
 .accordion-header { background: #fff; border: none; width: 100%; padding: 1.5rem; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1rem; }

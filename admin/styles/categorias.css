@@ -1,5 +1,7 @@
 /* ====== Admin: Categorías ====== */
 
+main { height: 85vh; }
+
 /* Layout: formulario + tabla */
 .category-grid{
   display: grid;

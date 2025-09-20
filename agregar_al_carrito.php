@@ -57,7 +57,7 @@ if ($producto) {
 }
 
 // 6. Redirigir al usuario de vuelta
-// Añadimos un parámetro de mensaje a la URL de retorno
+
 if (strpos($return_url, '?') === false) {
     $return_url .= '?mensaje=' . urlencode($mensaje);
 } else {

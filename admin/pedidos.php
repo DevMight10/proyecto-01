@@ -285,8 +285,16 @@ include 'includes/admin_header.php';
          const accordionHeaders = document.querySelectorAll('.accordion-header');
          accordionHeaders.forEach(header => {
              header.addEventListener('click', () => {
+                 const accordionItem = header.parentElement;
                  const content = header.nextElementSibling;
-                 header.classList.toggle('active');
+                 const isExpanded = accordionItem.classList.contains('open');
+
+                 // Toggle open class for styling (like chevron rotation)
+                 accordionItem.classList.toggle('open');
+                 // Toggle ARIA attribute for accessibility
+                 header.setAttribute('aria-expanded', !isExpanded);
+
+                 // Animate the content height
                  if (content.style.maxHeight) {
                      content.style.maxHeight = null;
                  } else {

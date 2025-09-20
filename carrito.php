@@ -177,9 +177,18 @@ include 'includes/header.php';
 </main>
 
 <style>
+    
+    main .container{
+        height: 80vh;
+    }
+    
     .empty-cart {
         text-align: center;
         padding: 3rem;
+    }
+
+    .empty-cart p{
+        margin-bottom: 1rem;
     }
 
     .cart-items {

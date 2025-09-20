@@ -60,9 +60,13 @@
 .accordion-item [aria-expanded="true"] .fa-chevron-down{ transform: rotate(180deg); }
 
 /* Contenido del acordeón (colapsado por defecto) */
-.accordion-content{ display:none; padding: 0 16px 14px; background:#fff; }
-.accordion-item.open .accordion-content,
-.accordion-item [aria-expanded="true"] + .accordion-content{ display:block; }
+.accordion-content {
+    max-height: 0;
+    overflow: hidden;
+    padding: 0 16px 14px;
+    background: #fff;
+    transition: max-height 0.35s ease-in-out;
+}
 
 /* ====== Detalles internos ====== */
 .order-details-admin{ padding: 6px 0 0; }

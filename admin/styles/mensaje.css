@@ -1,6 +1,9 @@
 /* ====== Admin: Mensajes ====== */
 
 /* Contenedor responsive de la tabla */
+
+main { height: 85vh; }
+
 .table-responsive{
   background: #fff;
   border: 1px solid #E9EFEC;

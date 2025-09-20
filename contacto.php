@@ -37,7 +37,7 @@ include 'includes/header.php';
                     <i class="fas fa-map-marker-alt"></i>
                     <div>
                         <h3>Dirección</h3>
-                        <p>Satélite Norte, La Paz - Bolivia</p>
+                        <p>Satélite Norte, Warnes- Bolivia</p>
                     </div>
                 </div>
                 
@@ -111,8 +111,6 @@ include 'includes/header.php';
     </div>
 </main>
 
-<style>
 
-</style>
 
 <?php include 'includes/footer.php'; ?>
