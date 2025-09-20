@@ -1,3 +1,8 @@
+:root {
+    --primary-color: #007B44;
+    --error: #dc3545; /* Rojo para errores y botones de peligro */
+}
+
 *{
     margin: 0;
     padding: 0;
